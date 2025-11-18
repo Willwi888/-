@@ -135,7 +135,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             }
         );
     } catch (error) {
-        alert(`影片匯出失敗：${error instanceof Error ? error.message : "未知錯誤"}`);
+        let errorMessage = "未知錯誤";
+        if (error instanceof Error) {
+            errorMessage = error.message;
+            if (error.message.toLowerCase().includes('failed to fetch') || error.message.toLowerCase().includes('取得失敗')) {
+                errorMessage = '無法載入必要的轉檔資源，請檢查您的網路連線並再試一次。這可能是暫時的網路問題或內容安全政策（CSP）所導致。';
+            }
+        }
+        alert(`影片匯出失敗：${errorMessage}`);
         console.error(error);
     } finally {
         setIsExporting({ active: false, message: '' });

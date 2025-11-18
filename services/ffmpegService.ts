@@ -9,8 +9,8 @@ async function loadFFmpeg() {
     if (ffmpeg && ffmpeg.isLoaded()) return ffmpeg;
     ffmpeg = createFFmpeg({
         log: true,
-        // Explicitly set corePath for reliability with CDN version
-        corePath: 'https://unpkg.com/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',
+        // Using jsdelivr CDN as an alternative to unpkg for better reliability
+        corePath: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core-st@0.11.0/dist/ffmpeg-core.js',
     });
     await ffmpeg.load();
     return ffmpeg;
